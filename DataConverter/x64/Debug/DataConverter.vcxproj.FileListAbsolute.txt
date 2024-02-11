@@ -1,1 +1,2 @@
 D:\Prog\DataConverter\x64\Debug\DataConverter.exe
+D:\Prog\data-converter\DataConverter\x64\Debug\DataConverter.exe
