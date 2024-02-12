@@ -1,3 +1,3 @@
 ﻿  FileActions.cpp
-D:\Prog\data-converter\DataConverter\FileActions.cpp(57,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Prog\data-converter\DataConverter\FileActions.cpp(74,23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   DataConverter.vcxproj -> D:\Prog\data-converter\DataConverter\x64\Debug\DataConverter.exe

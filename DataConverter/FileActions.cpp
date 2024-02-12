@@ -1,5 +1,15 @@
 #include "FileActions.h"
 
+std::vector<std::string> FileActions::getKeys()
+{
+	return keys;
+}
+
+std::vector<std::vector<std::string>> FileActions::getValues()
+{
+	return values;
+}
+
 /// <summary>
 /// Open the file to the provided path and assign the type for later use
 /// </summary>
@@ -8,14 +18,14 @@
 /// <param name="action">The action to do with the file, either 'r' for "reading" or 'w' for "write"</param>
 FileActions::FileActions(std::string path, std::string type, char action)
 {
+
 	if (action == 'r')
 	{
-		//std::ifstream file(path);
 		file.open(path, std::ios::in);
 	}
 	else if (action == 'w')
 	{
-		std::ofstream file(path, std::ios::out);
+		file.open(path, std::ios::out);
 	}
 	else
 	{
@@ -50,6 +60,33 @@ void FileActions::readCSV()
 
 	std::getline(file, header);
 	getKeys(header);
+
+	while (std::getline(file, wLine))
+	{
+		values.push_back(
+			parseCSV(wLine)
+		);
+	}
+}
+
+std::vector<std::string> FileActions::parseCSV(std::string line)
+{
+	int l = line.length();
+	size_t pos = 0;
+	size_t last = 0;
+	std::vector<std::string> elements;
+
+	for (pos; pos <= l; pos++)
+	{
+		char current = line[pos];
+		if (current == ';' || current == '\0')
+		{
+			elements.push_back(line.substr(last, pos - last));
+			last = pos + 1;
+		}
+	}
+
+	return elements;
 }
 
 /// <summary>
@@ -58,17 +95,5 @@ void FileActions::readCSV()
 /// <param name="header">The CSV file's header</param>
 void FileActions::getKeys(std::string header)
 {
-	int l = header.length();
-	size_t pos = 0;
-	size_t last = 0;
-
-	for (pos; pos <= l; pos++)
-	{
-		char current = header[pos];
-		if (current == ';' || current == '\0')
-		{
-			keys.push_back(header.substr(last, pos - last));
-			last = pos + 1;
-		}
-	}
+	keys = parseCSV(header);
 }

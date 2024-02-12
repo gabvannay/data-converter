@@ -1,15 +1,6 @@
 #include <iostream>
 #include "Interactions.h"
 
-/*
-void Interactions::askParams() 
-{
-	askSourcePath();
-	askDestinationDatatype();
-	askDestinationPath();
-}
-*/
-
 /// <summary>
 /// Asks for the path leading to the source file. Will then try to get the extension to find the datatype.
 /// </summary>
